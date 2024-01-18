@@ -1,5 +1,6 @@
 
 import UIKit
+import WeScan
 
 @objc(EdgeDetector)
 class EdgeDetector: NSObject {
