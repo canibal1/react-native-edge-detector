@@ -14,6 +14,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-EdgeDetectorExample-EdgeDetectorExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-EdgeDetectorExample-EdgeDetectorExampleTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		D432EFDF2B59477F00F8CFB5 /* WeScan in Frameworks */ = {isa = PBXBuildFile; productRef = D432EFDE2B59477F00F8CFB5 /* WeScan */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C80B921A6F3F58F76C31292 /* libPods-EdgeDetectorExample.a in Frameworks */,
+				D432EFDF2B59477F00F8CFB5 /* WeScan in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +193,9 @@
 			dependencies = (
 			);
 			name = EdgeDetectorExample;
+			packageProductDependencies = (
+				D432EFDE2B59477F00F8CFB5 /* WeScan */,
+			);
 			productName = EdgeDetectorExample;
 			productReference = 13B07F961A680F5B00A75B9A /* EdgeDetectorExample.app */;
 			productType = "com.apple.product-type.application";
@@ -221,6 +226,9 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
+			packageReferences = (
+				D432EFDD2B59477F00F8CFB5 /* XCRemoteSwiftPackageReference "WeScan.git" */,
+			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -699,6 +707,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D432EFDD2B59477F00F8CFB5 /* XCRemoteSwiftPackageReference "WeScan.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WeTransfer/WeScan.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D432EFDE2B59477F00F8CFB5 /* WeScan */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D432EFDD2B59477F00F8CFB5 /* XCRemoteSwiftPackageReference "WeScan.git" */;
+			productName = WeScan;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }

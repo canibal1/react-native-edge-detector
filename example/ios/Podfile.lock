@@ -944,8 +944,6 @@ PODS:
   - React-Mapbuffer (0.73.2):
     - glog
     - React-debug
-  - react-native-document-scanner-plugin (0.9.1):
-    - React-Core
   - react-native-edge-detector (0.1.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1175,7 +1173,6 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector-modern`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
-  - react-native-document-scanner-plugin (from `../node_modules/react-native-document-scanner-plugin`)
   - react-native-edge-detector (from `../..`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -1272,8 +1269,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   React-Mapbuffer:
     :path: "../node_modules/react-native/ReactCommon"
-  react-native-document-scanner-plugin:
-    :path: "../node_modules/react-native-document-scanner-plugin"
   react-native-edge-detector:
     :path: "../.."
   React-nativeconfig:
@@ -1361,7 +1356,6 @@ SPEC CHECKSUMS:
   React-jsinspector: 03644c063fc3621c9a4e8bf263a8150909129618
   React-logger: 66b168e2b2bee57bd8ce9e69f739d805732a5570
   React-Mapbuffer: 9ee041e1d7be96da6d76a251f92e72b711c651d6
-  react-native-document-scanner-plugin: bcb4b5a6770ebb10080c8f051de1e9c1bb81afac
   react-native-edge-detector: 71a9a8be9e9e4942925da0f58ef60a6d83093775
   React-nativeconfig: d753fbbc8cecc8ae413d615599ac378bbf6999bb
   React-NativeModulesApple: 964f4eeab1b4325e8b6a799cf4444c3fd4eb0a9c
