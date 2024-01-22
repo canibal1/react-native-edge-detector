@@ -1,62 +1,49 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
-
-import { StyleSheet, View, Text, Button, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Button, Image, SafeAreaView } from 'react-native';
 import { openEdgeDetector } from 'react-native-edge-detector';
 
-import RNFS from 'react-native-fs';
 export default function App() {
+  const [frontImage, setFrontImage] = useState<string>();
+  const [backImage, setBackImage] = useState<string>();
 
-  const [image, setImage] = useState<string>();
-
-
-
-  useEffect(() => {
-    console.log(image);
-
-  }, [image])
-  const openDetector = React.useCallback(async () => {
-
-    const dest = `${RNFS.TemporaryDirectoryPath}/` + "file-to-e23o3pe" + Date.now().toString() + ".jpeg";
-    const isSuccess = await openEdgeDetector(
-      dest,
+  const openDetector = async (side: string) => {
+    const base64Data = await openEdgeDetector(
       "Scanning",
       "Crop",
       "Black White",
-      "Reset")
+      "Reset"
+    );
 
-    //  const base64String = await RNFS.readFile(dest, 'base64'); 
-    if (isSuccess == true) { setImage(dest) }
-  }, [image, setImage]);
+    if (base64Data) {
+      if (side === 'front') {
+        setFrontImage(base64Data);
+      } else if (side === 'back') {
+        setBackImage(base64Data);
+      }
+    }
+  };
 
-  return (
-    <View style={styles.container}>
+  const renderFront = () => (
+    <View key={"renderFront"}>
+      <Text>Front Text</Text>
+      {frontImage && <Image source={{ uri: "data:image/png;base64," + frontImage }} style={{ width: 300, height: 200 }} />}
+      <Button title="Front Button" onPress={() => openDetector("front")} />
+    </View>
+  ); 
 
-      <Text>Result: {image}</Text>
-      {<Image source={{ uri: 'file://' + image }}
-
-        style={{
-          width: "70%", height: "18%", position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: [{ translateX: -150 }, { translateY: -150 }],
-        }} />}
-      <Button title='Open Edg e Dete ct or' onPress={async () => await openDetector()}></Button>
-
+  const renderBack = () => (
+    <View key={"renderBack"}>
+      <Text>Back Text</Text>
+      {backImage && <Image source={{ uri: "data:image/png;base64," + backImage }} style={{ width: 300, height: 200 }} />}
+      <Button title="Back Button" onPress={() => openDetector("back")} />
     </View>
   );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
-
+  return (
+    <SafeAreaView>
+    <View>
+      {[renderFront(), renderBack()]}
+    </View>
+    </SafeAreaView>
+  );
+};

@@ -1,4 +1,5 @@
 import { NativeModules, Platform, DeviceEventEmitter } from 'react-native';
+import RNFS from 'react-native-fs';
 
 const LINKING_ERROR =
   `The package 'react-native-edge-detector' doesn't seem to be linked. Make sure: \n\n` +
@@ -18,18 +19,17 @@ const EdgeDetector = NativeModules.EdgeDetector
   );
 
 export async function openEdgeDetector(
-  saveTo: string,
+ 
   scanTitle: string,
   cropTitle: string,
   cropBlackWhiteTitle: string,
   cropResetTitle: string
-): Promise<boolean> {
+): Promise<string|undefined> {
   if (Platform.OS === 'ios') {
     try {
       // Create a promise to wrap the event listener
-      const scanSuccessPromise = new Promise<boolean>((resolve) => {
+      const scanSuccessPromise = new Promise<string>((resolve) => {
         const eventListener = (event: any) => {
-          console.log('Scan success:', event.data);
           // Remove the event listener once it's triggered
           DeviceEventEmitter.removeAllListeners();
           resolve(event.data); // Resolve the promise with the event data
@@ -40,13 +40,7 @@ export async function openEdgeDetector(
       });
 
       // Trigger the native method
-      await EdgeDetector.openEdgeDetector(
-        saveTo,
-        scanTitle,
-        cropTitle,
-        cropBlackWhiteTitle,
-        cropResetTitle
-      );
+      await EdgeDetector.openEdgeDetector();
 
       // Wait for the promise to be resolved
       const result = await scanSuccessPromise;
@@ -54,25 +48,35 @@ export async function openEdgeDetector(
       return result; // Return the result obtained from the event
     } catch (error) {
       console.error('Error opening Edge Detector on iOS:', error);
-      return false;
+      return undefined;
     }
   } else if (Platform.OS === 'android') {
     // Android-specific code
     try {
+
+    const dest = `${RNFS.TemporaryDirectoryPath}/` + "file-to-e23o3pe" + Date.now().toString() + ".jpeg";
       const eventData = await EdgeDetector.openEdgeDetector(
-        saveTo,
+        dest,
         scanTitle,
         cropTitle,
         cropBlackWhiteTitle,
         cropResetTitle
       );
-      return eventData; // Assuming eventData is a boolean indicating success
+
+      if (eventData == true) {
+
+        const data = await RNFS.readFile(dest, 'base64')
+
+        return data;
+      }
+
     } catch (error) {
       console.error('Error opening Edge Detector on Android:', error);
-      return false;
+      return undefined;
     }
   } else {
     console.error('Unsupported platform');
-    return false;
+    return undefined;
   }
+  return undefined;
 }

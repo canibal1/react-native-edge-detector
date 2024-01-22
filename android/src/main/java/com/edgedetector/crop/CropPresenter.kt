@@ -146,7 +146,7 @@ class CropPresenter(
     val rotatePic = rotateBitmap
     if (null != rotatePic) {
       val outStream = FileOutputStream(file)
-      rotatePic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+      rotatePic.compress(Bitmap.CompressFormat.JPEG, 70, outStream)
       outStream.flush()
       outStream.close()
       rotatePic.recycle()
@@ -157,7 +157,7 @@ class CropPresenter(
 
       if (null != pic) {
         val outStream = FileOutputStream(file)
-        pic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+        pic.compress(Bitmap.CompressFormat.JPEG, 70, outStream)
         outStream.flush()
         outStream.close()
         pic.recycle()
@@ -166,7 +166,7 @@ class CropPresenter(
         val cropPic = croppedBitmap
         if (null != cropPic) {
           val outStream = FileOutputStream(file)
-          cropPic.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+          cropPic.compress(Bitmap.CompressFormat.JPEG, 70, outStream)
           outStream.flush()
           outStream.close()
           cropPic.recycle()
